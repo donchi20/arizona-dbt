@@ -1,9 +1,9 @@
 select 
     orderdate as order_date,
-    ordernumber as order_no,
+    ordernumber as order_number,
     productkey as product_id,
-    customerkey as customer_id,
+    cast(customerkey as text) as customer_id,
     territorykey as territory_id,
-    orderquantity as order_qty
+    orderquantity as order_quantity
 from 
-    source.sales.sales
+    {{ source('adventureworks', 'sales') }}

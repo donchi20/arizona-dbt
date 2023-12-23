@@ -1,0 +1,74 @@
+version: 2
+
+sources:
+  - name: adventureworks
+    description: source databases for adventure works sales
+    database: source
+    schema: sales
+    tables:
+      - name: customers
+        description: records of customers
+      - name: sales
+        description: record of sales transaction by item
+      - name: products
+        description: record of each product info
+      - name: territory
+        description: list of sales regions
+
+models:
+  - name: stg_customers
+    description: One record per customer
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+          
+  - name: dim_customers
+    description: One record per customer
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+          
+  - name: stg_sales
+    columns:
+      - name: order_number
+        tests:
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+  
+  - name: stg_products
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+  
+  - name: stg_territory
+    columns:
+      - name: territory_id
+        tests:
+          - unique
+          - not_null
+  
+  - name: dim_products
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+
+              
