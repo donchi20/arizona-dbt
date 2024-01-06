@@ -77,4 +77,4 @@ models:
       - name: territory_id
         tests:
           - unique
-          - not null              
+          - not_null              

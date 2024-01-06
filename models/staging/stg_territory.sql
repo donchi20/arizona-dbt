@@ -4,4 +4,4 @@ select
     country,
     continent
 from
-    {{ source('adventureworks', 'territory') }}
+    {{ source('arizona', 'territory') }}

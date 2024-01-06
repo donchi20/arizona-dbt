@@ -9,7 +9,7 @@ with stg_products as
     productprice as product_price
 
 from
-    {{ source('adventureworks', 'products') }}
+    {{ source('arizona', 'products') }}
 )
 
 select * from stg_products

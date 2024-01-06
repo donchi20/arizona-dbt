@@ -22,7 +22,7 @@ territory_orders as
 dim_territory as 
 (
     select
-        row_number() over(order by territory_id asc) as territory_pk
+        row_number() over(order by territory_id asc) as territory_pk,
         t.territory_id,
         t.region,
         t.country,
