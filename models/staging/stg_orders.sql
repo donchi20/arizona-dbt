@@ -6,4 +6,4 @@ select
     territorykey as territory_id,
     orderquantity as order_quantity
 from 
-    {{ source('adventureworks', 'sales') }}
+    {{ source('adventureworks', 'orders') }}

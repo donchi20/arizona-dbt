@@ -2,14 +2,14 @@ version: 2
 
 sources:
   - name: adventureworks
-    description: source databases for adventure works sales
-    database: source
+    description: source tables for adventure works database
+    database: adventureworks_source
     schema: sales
     tables:
       - name: customers
         description: records of customers
-      - name: sales
-        description: record of sales transaction by item
+      - name: orders
+        description: record of sales orders by order line item
       - name: products
         description: record of each product info
       - name: territory
@@ -24,15 +24,7 @@ models:
           - not_null
           - unique
           
-  - name: dim_customers
-    description: One record per customer
-    columns:
-      - name: customer_id
-        tests:
-          - not_null
-          - unique
-          
-  - name: stg_sales
+  - name: stg_orders
     columns:
       - name: order_number
         tests:
@@ -64,6 +56,15 @@ models:
           - unique
           - not_null
   
+
+  - name: dim_customers
+    description: One record per customer
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+  
   - name: dim_products
     columns:
       - name: product_id
@@ -71,4 +72,9 @@ models:
           - unique
           - not_null
 
-              
+  - name: dim_territory
+    columns:
+      - name: territory_id
+        tests:
+          - unique
+          - not null              

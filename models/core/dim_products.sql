@@ -4,21 +4,22 @@ with
         select * from {{ ref('stg_products') }}
     ),
 
-    sales as
+    orders as
     (
-        select * from {{ ref('stg_sales') }}
+        select * from {{ ref('stg_orders') }}
     ),
 
-    product_sales as 
+    product_orders as 
     (
         select 
             product_id,
             sum(order_quantity) as units_sold
-        from sales
+
+        from  orders
         group by 1
     ),
 
-    final as 
+    dim_products as 
     (
         select 
             row_number() over(order by product_id asc) as product_pk,
@@ -28,11 +29,11 @@ with
             p.product_cost,
             p.product_price,
             coalesce(s.units_sold,0) as units_sold,
-            (s.units_sold * p.product_price) as revenue
+            (s.units_sold * p.product_price) as product_revenue
 
         from
             products as p
-            left join product_sales as s using (product_id)
+            left join product_orders as s using (product_id)
     )
 
-select * from final
+select * from dim_products

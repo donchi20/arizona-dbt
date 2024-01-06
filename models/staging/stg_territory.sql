@@ -3,6 +3,5 @@ select
     region,
     country,
     continent
-
 from
     {{ source('adventureworks', 'territory') }}

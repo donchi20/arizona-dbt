@@ -4,24 +4,25 @@ with
         select * from {{ ref('stg_customers') }}
     ),
 
-    sales as
+    orders as
     (
-        select * from {{ ref('stg_sales') }}
+        select * from {{ ref('stg_orders') }}
     ),
 
-    customer_sales as 
+    customer_orders as 
     (
         select 
             customer_id,
             min(order_date) as first_order_date,
             max(order_date) as most_recent_order_date,
             count(order_number) as number_of_orders,
-            sum(order_quantity) as total_order_quantity
-        from sales
+            sum(order_quantity) as units_purchased
+
+        from  orders
         group by 1
     ),
 
-    final as 
+    dim_customers as 
     (
         select 
             row_number() over(order by customer_id asc) as customer_pk,
@@ -32,13 +33,13 @@ with
             customers.gender,
             customers.occupation,
             customers.annual_income,
-            customer_sales.first_order_date,
-            customer_sales.most_recent_order_date,
-            coalesce(customer_sales.number_of_orders,0) as number_of_orders,
-            coalesce(customer_sales.total_order_quantity,0) as total_order_quantity
+            customer_orders.first_order_date,
+            customer_orders.most_recent_order_date,
+            coalesce(customer_orders.number_of_orders,0) as number_of_orders,
+            coalesce(customer_orders.units_purchased,0) as units_purchased
         from
             customers
-            left join customer_sales using (customer_id)
+            left join customer_orders using (customer_id)
     )
 
-select * from final
+select * from dim_customers
