@@ -11,7 +11,7 @@ with stg_customers as
     annualincome as annual_income,
     occupation 
 from 
-    {{ source('adventureworks', 'customers') }}
+    {{ source('arizona', 'customers') }}
 )
 
 select * from stg_customers

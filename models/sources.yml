@@ -1,10 +1,10 @@
 version: 2
 
 sources:
-  - name: adventureworks
+  - name: arizona
     description: source tables for adventure works database
-    database: adventureworks_source
-    schema: sales
+    database: arizona_staging
+    schema: source
     tables:
       - name: customers
         description: records of customers
@@ -77,4 +77,4 @@ models:
       - name: territory_id
         tests:
           - unique
-          - not null              
+          - not_null              
