@@ -1,1 +1,1 @@
-# adventureworks-dbt
+# arizona-dbt
