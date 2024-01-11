@@ -4,6 +4,16 @@ with
         select * from {{ ref('stg_products') }}
     ),
 
+    subcategory as
+    (
+        select * from {{ ref('stg_product_subcategories') }}
+    ),
+
+    category as
+    (
+        select * from {{ ref('stg_product_categories') }}
+    ),
+
     orders as
     (
         select * from {{ ref('stg_orders') }}
@@ -26,6 +36,8 @@ with
             p.product_id,
             p.product_name,
             p.model_name,
+            sc.subcategory,
+            c.category,
             p.product_cost,
             p.product_price,
             coalesce(s.units_sold,0) as units_sold,
@@ -33,6 +45,8 @@ with
 
         from
             products as p
+            left join subcategory as sc using (subcategory_id)
+            left join category as c using (category_id)
             left join product_orders as s using (product_id)
     )
 
