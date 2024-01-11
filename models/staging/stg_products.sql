@@ -5,6 +5,7 @@ with stg_products as
     coalesce(productkey, -1) as product_id, -- replace product key with -1
     productname as product_name,
     modelname as model_name,
+    productsubcategorykey as subcategory_id,
     productcost as product_cost,
     productprice as product_price
 

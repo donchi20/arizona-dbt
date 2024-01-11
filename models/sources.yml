@@ -14,6 +14,12 @@ sources:
         description: record of each product info
       - name: territory
         description: list of sales regions
+      - name: product_categories
+        description: list of product categories
+      - name: product_subcategories
+        description: list of product subcategories
+      - name: returns
+        description: list of product returns
 
 models:
   - name: stg_customers
@@ -56,6 +62,38 @@ models:
           - unique
           - not_null
   
+  - name: stg_product_subcategories
+    columns:
+      - name: subcategory_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_product_categories
+    columns:
+      - name: category_id
+        tests:
+          - unique
+          - not_null              
+
+  - name: stg_returns
+    columns:
+      - name: return_date
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: territory_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_territory')
+              field: territory_id
+
 
   - name: dim_customers
     description: One record per customer
@@ -77,4 +115,5 @@ models:
       - name: territory_id
         tests:
           - unique
-          - not_null              
+          - not_null 
+             
