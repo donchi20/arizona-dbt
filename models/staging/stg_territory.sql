@@ -1,5 +1,5 @@
 select 
-    salesterritorykey as territory_id,
+    sales_territory_key as territory_id,
     region,
     country,
     continent

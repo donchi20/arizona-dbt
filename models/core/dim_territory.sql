@@ -35,7 +35,7 @@ dim_territory as
         t.country,
         t.continent,
         coalesce(todr.units_sold, 0) as units_sold,
-        todr.revenue as revenue
+        todr.revenue as territory_revenue
 
     from
         territory t 

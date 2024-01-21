@@ -1,9 +1,9 @@
 select 
-    orderdate as order_date,
-    ordernumber as order_number,
-    productkey as product_id,
-    cast(customerkey as text) as customer_id,
-    territorykey as territory_id,
-    orderquantity as order_quantity
+    order_date,
+    order_number,
+    product_key as product_id,
+    customer_key as customer_id,
+    territory_key as territory_id,
+    order_quantity
 from 
     {{ source('arizona', 'orders') }}
