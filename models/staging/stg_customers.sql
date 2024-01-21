@@ -1,15 +1,19 @@
 with stg_customers as
 (
     select 
-    row_number() over(partition by customerkey order by customerkey) as rn, -- using column to remove duplicates
-    coalesce(customerkey, 'not available') as customer_id, -- replace null customer keys with not available
-    firstname as first_name,
-    lastname as last_name,
-    maritalstatus as marital_status,
+    row_number() over(partition by customer_key order by customer_key) as rn, -- using column to remove duplicates
+    coalesce(customer_key, -1) as customer_id, -- replace null customer keys with not available
+    first_name,
+    last_name,
+    birth_date,
+    marital_status,
     gender,
-    emailaddress as email,
-    annualincome as annual_income,
-    occupation 
+    email_address as email,
+    annual_income,
+    total_children,
+    education_level,
+    occupation,
+    home_owner 
 from 
     {{ source('arizona', 'customers') }}
 )

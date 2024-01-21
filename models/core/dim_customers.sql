@@ -8,6 +8,10 @@ with
     (
         select * from {{ ref('stg_orders') }}
     ),
+    products as
+    (
+        select * from {{ ref('stg_products') }}
+    ),
 
     customer_orders as 
     (
@@ -16,9 +20,11 @@ with
             min(order_date) as first_order_date,
             max(order_date) as most_recent_order_date,
             count(order_number) as number_of_orders,
-            sum(order_quantity) as units_purchased
+            sum(order_quantity) as units_purchased,
+            sum(order_quantity * product_price) as customer_spend
 
         from  orders
+        left join products using (product_id)
         group by 1
     ),
 
@@ -26,20 +32,27 @@ with
     (
         select 
             row_number() over(order by customer_id asc) as customer_pk,
-            customers.customer_id,
-            customers.first_name,
-            customers.last_name,
-            customers.email,
-            customers.gender,
-            customers.occupation,
-            customers.annual_income,
-            customer_orders.first_order_date,
-            customer_orders.most_recent_order_date,
-            coalesce(customer_orders.number_of_orders,0) as number_of_orders,
-            coalesce(customer_orders.units_purchased,0) as units_purchased
+            c.customer_id,
+            c.first_name,
+            c.last_name,
+            c.email,
+            c.gender,
+            c.birth_date,
+            c.marital_status,
+            c.home_owner,
+            c.total_children,
+            c.education_level,
+            c.occupation,
+            c.annual_income,
+            co.first_order_date,
+            co.most_recent_order_date,
+            coalesce(co.number_of_orders, 0) as number_of_orders,
+            coalesce(co.units_purchased, 0) as units_purchased,
+            coalesce(co.customer_spend, 0) as customer_spend
+
         from
-            customers
-            left join customer_orders using (customer_id)
+            customers c
+            left join customer_orders co using (customer_id)
     )
 
 select * from dim_customers
