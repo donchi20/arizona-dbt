@@ -2,7 +2,7 @@ with stg_customers as
 (
     select 
     row_number() over(partition by customer_key order by customer_key) as rn, -- using column to remove duplicates
-    coalesce(customer_key, -1) as customer_id, -- replace null customer keys with not available
+    coalesce(customer_key, -1) as customer_id, -- replace null keys with negavtive 1
     first_name,
     last_name,
     birth_date,
@@ -20,5 +20,3 @@ from
 
 select * from stg_customers
 where rn = 1
-
--- create a dup_customers table to store dups
