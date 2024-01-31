@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  - name: nightly
+  - name: nightly - all models
     schedule: 0 0 * * * # This example will run every day at midnight.
     steps:
       - name: run models
