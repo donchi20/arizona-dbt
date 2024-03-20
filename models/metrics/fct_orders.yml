@@ -1,0 +1,24 @@
+semantic_models:
+  - model: ref('fact_orders.sql')
+    name: orders
+    defaults:
+      agg_time_dimension: order_date
+    description: order grain mart
+
+    entities:
+      - name: order_number
+        type: primary
+    
+    measures:
+      - name: total_sales
+        expr: revenue
+        agg: sum
+
+metrics:
+  - label: "total sales"
+    name: total_sales
+    description: "sum of all revenue"
+    type: simple
+    type_params:
+      measure: total_sales
+      
