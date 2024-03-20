@@ -22,6 +22,10 @@ semantic_models:
         expr: revenue
         agg: sum
 
+      - name: total_orders
+        expr: order_number
+        agg: count_distinct
+
 metrics:
   - name: total_sales
     description: "sum of all revenue"
@@ -29,4 +33,10 @@ metrics:
     label: "total sales"
     type_params:
       measure: total_sales
-      
+  
+  - name: total_orders
+    description: "count of orders"
+    type: simple
+    label: "total orders"
+    type_params:
+      measure: total_orders
