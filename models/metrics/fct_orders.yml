@@ -1,9 +1,10 @@
 semantic_models:
-  - model: ref('fact_orders')
-    name: orders
+  - name: orders
     defaults:
       agg_time_dimension: order_date
-    description: order grain mart
+    description: |
+        Customer grain mart.
+    model: ref('fact_orders')
 
     entities:
       - name: order_number
@@ -15,10 +16,10 @@ semantic_models:
         agg: sum
 
 metrics:
-  - label: "total sales"
-    name: total_sales
+  - name: total_sales
     description: "sum of all revenue"
     type: simple
+    label: "customers"
     type_params:
       measure: total_sales
       
