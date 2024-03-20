@@ -3,12 +3,19 @@ semantic_models:
     defaults:
       agg_time_dimension: order_date
     description: |
-        Customer grain mart.
+        order grain mart.
     model: ref('fact_orders')
 
     entities:
       - name: order_number
+        expr: order_number
         type: primary
+    
+    dimensions:
+      - name: order_date
+        type: time
+        type_params:
+          time_granularity: day
     
     measures:
       - name: total_sales
@@ -19,7 +26,7 @@ metrics:
   - name: total_sales
     description: "sum of all revenue"
     type: simple
-    label: "customers"
+    label: "total sales"
     type_params:
       measure: total_sales
       
