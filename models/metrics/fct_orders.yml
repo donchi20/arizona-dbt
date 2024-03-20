@@ -1,5 +1,5 @@
 semantic_models:
-  - model: ref('fact_orders.sql')
+  - model: ref('fact_orders')
     name: orders
     defaults:
       agg_time_dimension: order_date
