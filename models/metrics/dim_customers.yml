@@ -24,6 +24,10 @@ semantic_models:
         expr: customer_id
         agg: count_distinct
 
+      - name: sales
+        expr: revenue
+        agg: sum
+
 metrics:
   - name: "customers"
     description: "Count of customers"
@@ -31,3 +35,10 @@ metrics:
     label: "customers"
     type_params:
       measure: customers
+  
+  - name: "total_sales"
+    description: "Sum of all revenue"
+    type: simple
+    label: "Total Sales"
+    type_params:
+      measure: sales
