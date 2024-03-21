@@ -9,5 +9,6 @@ semantic_models:
         type: primary
     
     dimensions:
-      - name: category
+      - name: category_sales
+        expr: category
         type: categorical
