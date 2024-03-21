@@ -54,8 +54,8 @@ metrics:
     type_params:
       measure: total_orders
 
-# Derived metrics:
-  - name: gross_profit
+#Derived metrics
+  - name: "gross_profit"
     label: "gross profit"
     description: "cost deducted from revenue"
     type: derived
