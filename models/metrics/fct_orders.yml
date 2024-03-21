@@ -29,6 +29,10 @@ semantic_models:
         expr: order_number
         agg: count_distinct
 
+      - name: cost
+        expr: cost
+        agg: sum
+
 metrics:
   - name: total_sales
     description: "sum of all revenue"
@@ -37,9 +41,26 @@ metrics:
     type_params:
       measure: total_sales
   
+  - name: total_cost
+    description: "sum of cost"
+    type: simple
+    type_params:
+      measure: cost
+  
   - name: total_orders
     description: "count of orders"
     type: simple
     label: "total orders"
     type_params:
       measure: total_orders
+
+# Derived metrics:
+  - name: gross_profit
+    label: "gross profit"
+    description: "cost deducted from revenue"
+    type: derived
+    type_params:
+      expr: total_sales - total_cost
+      metrics:
+        - name: total_sales
+        - name: total_cost
