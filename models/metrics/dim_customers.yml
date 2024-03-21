@@ -24,6 +24,10 @@ semantic_models:
       - name: customers
         expr: customer_id
         agg: count_distinct
+      
+      - name: customer_orders
+        expr: number_of_orders
+        agg: sum
 
 
 metrics:
@@ -33,3 +37,10 @@ metrics:
     label: "customers"
     type_params:
       measure: customers
+
+  - name: customer_orders
+    description: customer orders
+    label: "customer orders"
+    type: simple
+    type_params:
+      measure: customer_orders
