@@ -4,7 +4,7 @@ semantic_models:
     description: |
         product grain mart
     defaults:
-      agg_time_dimension: first_order_date
+      agg_time_dimension: last_order_date
 
     entities:
       - name: product_id
@@ -15,7 +15,7 @@ semantic_models:
         expr: category
         type: categorical
 
-      - name: first_order_date
+      - name: last_order_date
         type: time
         type_params:
           time_granularity: day
