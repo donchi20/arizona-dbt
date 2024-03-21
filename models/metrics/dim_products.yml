@@ -9,6 +9,18 @@ semantic_models:
         type: primary
     
     dimensions:
-      - name: category_sales
+      - name: category
         expr: category
         type: categorical
+    
+    measures:
+      - name: product_revenue
+        expr: product_revenue
+        agg: sum
+
+metrics:
+  - label: "product revenue"
+    name: product_revenue
+    type_params:
+      measure: product_revenue
+    type: simple
