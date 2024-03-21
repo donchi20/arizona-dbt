@@ -10,6 +10,9 @@ semantic_models:
       - name: order_number
         expr: order_number
         type: primary
+
+      - name: product_id
+        type: foreign
     
     dimensions:
       - name: order_date

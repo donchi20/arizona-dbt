@@ -24,6 +24,7 @@ with
         select 
             product_id,
             sum(order_quantity) as units_sold
+            min(order_date) as first_order_date
 
         from  orders
         group by 1
@@ -41,6 +42,7 @@ with
             p.product_cost,
             p.product_price,
             coalesce(s.units_sold,0) as units_sold,
+            first_order_date,
             (s.units_sold * p.product_price) as product_revenue
 
         from
