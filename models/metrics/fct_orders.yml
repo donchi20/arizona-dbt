@@ -42,6 +42,7 @@ metrics:
       measure: total_sales
   
   - name: total_cost
+    label: "total cost"
     description: "sum of cost"
     type: simple
     type_params:
@@ -54,13 +55,15 @@ metrics:
     type_params:
       measure: total_orders
 
-#Derived metrics
+
   - name: "gross_profit"
     label: "gross profit"
     description: "cost deducted from revenue"
     type: derived
     type_params:
-      expr: total_sales - total_cost
+      expr: revenue - cost
       metrics:
         - name: total_sales
+          alias: revenue
         - name: total_cost
+          alias: cost
