@@ -1,0 +1,13 @@
+semantic_models:
+  - model: ref('dim_products')
+    name: products
+    description: |
+        product grain mart
+
+    entities:
+      - name: product_id
+        type: primary
+    
+    dimensions:
+      - name: category
+        type: categorical
