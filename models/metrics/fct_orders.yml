@@ -19,9 +19,6 @@ semantic_models:
         type: time
         type_params:
           time_granularity: day
-    
-      - name: product_id
-        type: categorical
 
     measures:
       - name: total_sales

@@ -14,6 +14,11 @@ semantic_models:
       - name: category
         expr: category
         type: categorical
+
+      - name: first_order_date
+        type: time
+        type_params:
+          time_granularity: day
     
     measures:
       - name: product_revenue
