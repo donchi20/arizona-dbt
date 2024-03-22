@@ -34,6 +34,7 @@ semantic_models:
         agg: sum
 
 metrics:
+#SIMPLE
   - name: total_sales
     description: "sum of all revenue"
     type: simple
@@ -55,7 +56,7 @@ metrics:
     type_params:
       measure: total_orders
 
-
+# DERIVED
   - name: "gross_profit"
     label: "gross profit"
     description: "cost deducted from revenue"
@@ -67,3 +68,16 @@ metrics:
           alias: revenue
         - name: total_cost
           alias: cost
+
+# RATIO
+  - name: "sales_margin"
+    label: "sales margin mom"
+    description: "sales increase or decrease from last month"
+    type: derived
+    type_params:
+      expr: (total_sales - total_sales_lm)/total_sales_lm
+      metrics:
+        - name: total_sales
+        - name: total_sales
+          offset_window: 1 month
+          alias: tota_sales_lm
