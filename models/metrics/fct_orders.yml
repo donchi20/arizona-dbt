@@ -80,4 +80,4 @@ metrics:
         - name: total_sales
         - name: total_sales
           offset_window: 1 month
-          alias: tota_sales_lm
+          alias: total_sales_lm
